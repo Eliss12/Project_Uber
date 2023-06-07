@@ -34,6 +34,11 @@ const MyString& User::getLastName() const
 	return _lastName;
 }
 
+double User::getAccount() const
+{
+	return _account;
+}
+
 void User::setType(const MyString& type)
 {
 	_type = type;
@@ -57,4 +62,9 @@ void User::setFirstName(const MyString& firstName)
 void User::setLastName(const MyString& lastName)
 {
 	_lastName = lastName;
+}
+
+void User::setAccount(double account)
+{
+	_account = account;
 }
