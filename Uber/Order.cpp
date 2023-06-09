@@ -94,3 +94,13 @@ double Order::getMoneyToBePaid() const
 {
 	return moneyToBePaid;
 }
+
+void Order::setIsPaid(bool isPaid)
+{
+	this->isPaid = isPaid;
+}
+
+bool Order::getIsPaid() const
+{
+	return isPaid;
+}

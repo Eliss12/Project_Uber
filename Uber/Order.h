@@ -16,6 +16,7 @@ class Order
 	bool finished = false;
 	int _minutes = 0;
 	double moneyToBePaid = 0;
+	bool isPaid = false;
 
 public:
 	Order() = default;
@@ -27,6 +28,8 @@ public:
 	void setFinished(bool finished);
 	void setMinutes(int minutes);
 	void setMoneyToBePaid(double amount);
+	void setIsPaid(bool isPaid);
+
 	double getMoneyToBePaid() const;
 	int getMinutes() const;
 	const Driver& getDriver() const;
@@ -37,4 +40,5 @@ public:
 	bool getAccepted() const;
 	bool getCanceled() const;
 	bool getFinished() const;
+	bool getIsPaid() const;
 };
