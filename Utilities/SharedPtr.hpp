@@ -22,18 +22,17 @@ public:
 	T& operator*();
 	const T* operator->() const;
 	T* operator->();
-	bool operator()() const;
+	bool isNotNullptr() const;
 
 	~SharedPtr();
 };
 
 template <typename T>
-bool SharedPtr<T>::operator()() const
+bool SharedPtr<T>::isNotNullptr() const
 {
 	if (data != nullptr)
 		return true;
-	else
-		return false;
+	return false;
 }
 
 template <typename T>
