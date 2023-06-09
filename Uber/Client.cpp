@@ -8,9 +8,3 @@ Client::Client(const MyString& type, const MyString& userName, const MyString& p
 {
 
 }
-
-void Client::registration(const MyString& type, const MyString& userName, const MyString& password,
-	const MyString& firstName, const MyString& lastName)
-{
-	Client client(type, userName, password, firstName, lastName);
-}

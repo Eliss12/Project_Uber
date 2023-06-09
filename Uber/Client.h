@@ -8,7 +8,4 @@ public:
 
 	Client(const MyString& type, const MyString& userName, const MyString& password,
 		const MyString& firstName, const MyString& lastName);
-
-	void registration(const MyString& type, const MyString& userName, const MyString& password,
-		const MyString& firstName, const MyString& lastName);
 };
