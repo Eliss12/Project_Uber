@@ -22,6 +22,9 @@ public:
 		const MyString& firstName, const MyString& lastName,
 		const MyString& carNumber, const MyString& phoneNumber);
 
-	
+	bool login(const MyString& userName, const MyString& password);
+	void logout();
+	void checkClientNotifications() const;
+	void checkDriverNotifications() const;
 	
 };
