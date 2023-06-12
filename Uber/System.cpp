@@ -272,3 +272,20 @@ bool System::finishOrder(unsigned int ID)
 	std::cout << "You do not have an order with this ID!" << std::endl;
 	return false;
 }
+
+bool System::cancelOrder(unsigned int ID)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentClient).getUserName() == (*orders[i]).getClient().getUserName() && (*orders[i]).getID() == ID &&
+			(*orders[i]).getFinished() == false)
+		{
+			(*orders[i]).setCanceled(true);
+			return true;
+		}
+
+	}
+	std::cout << "You do not have an order with this ID!" << std::endl;
+	return false;
+}

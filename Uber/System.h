@@ -36,5 +36,6 @@ public:
 	bool declineOrder(unsigned int ID);
 	void changeAddress(const Address& address);
 	bool finishOrder(unsigned int ID);
+	bool cancelOrder(unsigned int ID);
 	
 };
