@@ -248,3 +248,27 @@ bool System::declineOrder(unsigned int ID)
 	std::cout << "You do not have an order with this ID!" << std::endl;
 	return false;
 }
+
+void System::changeAddress(const Address& address)
+{
+	currentDriver->setAddress(address);
+}
+
+bool System::finishOrder(unsigned int ID)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getID() == ID &&
+			(*orders[i]).getAccepted() == true)
+		{
+			(*orders[i]).setFinished(true);
+			changeAddress(orders[i]->getDestination());
+			(*currentDriver).setIsFree(true);
+			return true;
+		}
+
+	}
+	std::cout << "You do not have an order with this ID!" << std::endl;
+	return false;
+}

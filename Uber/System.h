@@ -34,5 +34,7 @@ public:
 	void checkMessages() const;
 	bool acceptOrder(unsigned int ID, int minutes);
 	bool declineOrder(unsigned int ID);
+	void changeAddress(const Address& address);
+	bool finishOrder(unsigned int ID);
 	
 };
