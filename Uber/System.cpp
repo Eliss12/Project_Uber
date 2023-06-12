@@ -189,3 +189,20 @@ void System::order(const Address& address, const Address& destination, unsigned 
 	orders.pushBack(order);
 	std::cout << std::endl << "Order ID: " << (*order).getID() << std::endl;
 }
+
+void System::checkMessages() const
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getAccepted() == false &&
+			(*orders[i]).getCanceled() == false && (*orders[i]).getFinished() == false)
+		{
+			std::cout << (*orders[i]).getClient().getFirstName() << " " << (*orders[i]).getClient().getLastName() <<
+				" has made an order from:" << std::endl;
+			std::cout << (*orders[i]).getAddress() << std::endl;
+			std::cout << "To:" << std::endl << (*orders[i]).getDestination() << std::endl;
+			std::cout << "Order ID: " << (*orders[i]).getID() << std::endl;
+		}
+	}
+}
