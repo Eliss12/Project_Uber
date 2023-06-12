@@ -41,5 +41,6 @@ public:
 	void checkOrder(unsigned int ID) const;
 	void addMoney(double amount);
 	bool pay(unsigned int ID, double amount);
+	bool acceptPayment(unsigned int ID);
 	
 };

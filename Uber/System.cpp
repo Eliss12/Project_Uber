@@ -352,3 +352,21 @@ bool System::pay(unsigned int ID, double amount)
 	std::cout << "You are not allowed to pay the order with this ID!" << std::endl;
 	return false;
 }
+
+bool System::acceptPayment(unsigned int ID)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+
+		if (orders[i]->getID() == ID && orders[i]->getDriver().getUserName() == currentDriver->getUserName() &&
+			orders[i]->getFinished() == true && orders[i]->getIsPaid())
+		{
+			currentDriver->setAccount(orders[i]->getMoneyToBePaid());
+			std::cout << "You successfully added " << orders[i]->getMoneyToBePaid() << " leva to your bank account!" << std::endl;
+			return true;
+		}
+	}
+	std::cout << "You are not allowed to accept payment from order with this ID!" << std::endl;
+	return false;
+}
