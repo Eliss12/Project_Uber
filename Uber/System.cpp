@@ -206,3 +206,27 @@ void System::checkMessages() const
 		}
 	}
 }
+
+bool System::acceptOrder(unsigned int ID, int minutes)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getID() == ID &&
+			(*orders[i]).getCanceled() == false && (*orders[i]).getFinished() == false)
+		{
+			if ((*currentDriver).getIsFree())
+			{
+				(*orders[i]).setAccepted(true);
+				(*orders[i]).setMinutes(minutes);
+				(*currentDriver).setIsFree(false);
+				return true;
+			}
+			std::cout << "You have not finished your previous order!" << std::endl;
+			return true;
+		}
+
+	}
+	std::cout << "You do not have an order with this ID!";
+	return false;
+}

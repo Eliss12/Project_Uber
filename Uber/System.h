@@ -32,5 +32,6 @@ public:
 	void order(const Address& address, const Address& destination, unsigned int travelersCount);
 
 	void checkMessages() const;
+	bool acceptOrder(unsigned int ID, int minutes);
 	
 };
