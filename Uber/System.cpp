@@ -121,3 +121,71 @@ void System::checkDriverNotifications() const
 		}
 	}
 }
+
+void System::sortDrivers(const Address& address)
+{
+	size_t driversSize = drivers.getSize();
+	double* distance = new double[driversSize] {};
+	for (size_t i = 0; i < driversSize; i++)
+	{
+		distance[i] = address.getPoint().getDist((*drivers[i]).getAddress().getPoint());
+	}
+
+	for (size_t i = 0; i < driversSize - 1; i++)
+	{
+		int minIndex = i;
+		for (size_t j = i; j < driversSize; j++)
+		{
+			if (distance[j] < distance[minIndex])
+				minIndex = j;
+		}
+		if (minIndex != i)
+		{
+			std::swap(drivers[i], drivers[minIndex]);
+			std::swap(distance[i], distance[minIndex]);
+		}
+	}
+}
+
+const Driver& System::findDriver(const Address& address)
+{
+	sortDrivers(address);
+	size_t driversSize = drivers.getSize();
+	if (!currentDriver.isNotNullptr())
+	{
+		for (size_t i = 0; i < driversSize; i++)
+		{
+			if ((*drivers[i]).getIsFree())
+				return (*drivers[i]);
+		}
+		return (*drivers[0]);
+	}
+
+	size_t i = 0;
+	for (i; i < driversSize; i++)
+	{
+		if ((*currentDriver).getUserName() == (*drivers[i]).getUserName())
+			break;
+	}
+	if (i != driversSize - 1)
+	{
+		i++;
+		for (i; i < driversSize; i++)
+		{
+			if ((*drivers[i]).getIsFree())
+				return (*drivers[i]);
+		}
+		return (*drivers[0]);
+	}
+	else
+		return (*drivers[0]);
+}
+
+void System::order(const Address& address, const Address& destination, unsigned int travelersCount)
+{
+	SharedPtr<Order> order(new Order((*currentClient), address, destination, travelersCount));
+	(*order).setID(orders.getSize() + 1);
+	(*order).setDriver(findDriver(address));
+	orders.pushBack(order);
+	std::cout << std::endl << "Order ID: " << (*order).getID() << std::endl;
+}

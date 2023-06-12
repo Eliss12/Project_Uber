@@ -26,5 +26,9 @@ public:
 	void logout();
 	void checkClientNotifications() const;
 	void checkDriverNotifications() const;
+
+	void sortDrivers(const Address& address);
+	const Driver& findDriver(const Address& address);
+	void order(const Address& address, const Address& destination, unsigned int travelersCount);
 	
 };
