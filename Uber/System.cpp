@@ -230,3 +230,21 @@ bool System::acceptOrder(unsigned int ID, int minutes)
 	std::cout << "You do not have an order with this ID!";
 	return false;
 }
+
+bool System::declineOrder(unsigned int ID)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getID() == ID &&
+			(*orders[i]).getCanceled() == false && (*orders[i]).getFinished() == false)
+		{
+			(*orders[i]).setAccepted(false);
+			(*orders[i]).setDriver(findDriver((*orders[i]).getAddress()));
+			return true;
+		}
+
+	}
+	std::cout << "You do not have an order with this ID!" << std::endl;
+	return false;
+}

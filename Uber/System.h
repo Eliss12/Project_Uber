@@ -33,5 +33,6 @@ public:
 
 	void checkMessages() const;
 	bool acceptOrder(unsigned int ID, int minutes);
+	bool declineOrder(unsigned int ID);
 	
 };
