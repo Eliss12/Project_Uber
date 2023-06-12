@@ -42,5 +42,7 @@ public:
 	void addMoney(double amount);
 	bool pay(unsigned int ID, double amount);
 	bool acceptPayment(unsigned int ID);
-	
+
+	bool rate(const MyString& driverName, short rating);
+	void findDriver(const MyString& driverName, short rating);
 };

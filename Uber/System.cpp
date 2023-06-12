@@ -370,3 +370,30 @@ bool System::acceptPayment(unsigned int ID)
 	std::cout << "You are not allowed to accept payment from order with this ID!" << std::endl;
 	return false;
 }
+
+bool System::rate(const MyString& driverName, short rating)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if (currentClient->getUserName() == orders[i]->getClient().getUserName() &&
+			orders[i]->getDriver().getUserName() == driverName && orders[i]->getFinished())
+		{
+			findDriver(driverName, rating);
+			return true;
+		}
+
+	}
+	std::cout << "You are not allowed to rate this driver!" << std::endl;
+	return false;
+}
+
+void System::findDriver(const MyString& driverName, short rating)
+{
+	size_t driversSize = drivers.getSize();
+	for (size_t i = 0; i < driversSize; i++)
+	{
+		if ((*drivers[i]).getUserName() == driverName)
+			(*drivers[i]).myRating.addRating(rating);
+	}
+}
