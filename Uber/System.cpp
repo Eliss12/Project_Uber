@@ -289,3 +289,37 @@ bool System::cancelOrder(unsigned int ID)
 	std::cout << "You do not have an order with this ID!" << std::endl;
 	return false;
 }
+
+void System::checkOrder(unsigned int ID) const
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if ((*currentClient).getUserName() == (*orders[i]).getClient().getUserName() &&
+			(*orders[i]).getID() == ID && (*orders[i]).getAccepted())
+		{
+			if ((*orders[i]).getFinished())
+			{
+				std::cout << "This order is finished!" << std::endl;
+				return;
+			}
+			else if ((*orders[i]).getCanceled())
+			{
+				std::cout << "This order is canceled!" << std::endl;
+				return;
+			}
+			std::cout << "Driver: " << (*orders[i]).getDriver().getFirstName() << " " << (*orders[i]).getDriver().getLastName();
+			std::cout << std::endl << "Car number: " << (*orders[i]).getDriver().getCarNumber();
+			std::cout << std::endl << "Phone number: " << (*orders[i]).getDriver().getPhoneNumber();
+			std::cout << std::endl << "Rating: " << (*orders[i]).getDriver().myRating.getRating() << std::endl;
+			return;
+		}
+		else if ((*currentClient).getUserName() == (*orders[i]).getClient().getUserName() &&
+			(*orders[i]).getID() == ID && !(*orders[i]).getAccepted())
+		{
+			std::cout << "Your order is in process!" << std::endl;
+			return;
+		}
+	}
+	std::cout << "You do not have an order with this ID!" << std::endl;
+}
