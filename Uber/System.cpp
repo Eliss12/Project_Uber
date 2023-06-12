@@ -323,3 +323,32 @@ void System::checkOrder(unsigned int ID) const
 	}
 	std::cout << "You do not have an order with this ID!" << std::endl;
 }
+
+void System::addMoney(double amount)
+{
+	(*currentClient).setAccount((*currentClient).getAccount() + amount);
+}
+
+bool System::pay(unsigned int ID, double amount)
+{
+	size_t ordersSize = orders.getSize();
+	for (size_t i = 0; i < ordersSize; i++)
+	{
+		if (orders[i]->getID() == ID && orders[i]->getClient().getUserName() == currentClient->getUserName() &&
+			orders[i]->getFinished() == true && !orders[i]->getIsPaid())
+		{
+			if (currentClient->getAccount() - amount <= EPSILON)
+			{
+				std::cout << "You do not have enough money in your bank account!" << std::endl;
+				return false;
+			}
+
+			orders[i]->setMoneyToBePaid(amount);
+			orders[i]->setIsPaid(true);
+			currentClient->setAccount(currentClient->getAccount() - amount);
+			return true;
+		}
+	}
+	std::cout << "You are not allowed to pay the order with this ID!" << std::endl;
+	return false;
+}

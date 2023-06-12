@@ -39,5 +39,7 @@ public:
 	bool cancelOrder(unsigned int ID);
 
 	void checkOrder(unsigned int ID) const;
+	void addMoney(double amount);
+	bool pay(unsigned int ID, double amount);
 	
 };
