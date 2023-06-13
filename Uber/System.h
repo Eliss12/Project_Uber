@@ -45,4 +45,11 @@ public:
 
 	bool rate(const MyString& driverName, short rating);
 	void findDriver(const MyString& driverName, short rating);
+
+	bool readClients(const char* fileName);
+	bool readDrivers(const char* fileName);
+	bool readOrders(const char* fileName);
+	bool writeClients(const char* fileName);
+	bool writeDrivers(const char* fileName);
+	bool writeOrders(const char* fileName);
 };

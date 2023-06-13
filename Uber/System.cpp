@@ -1,4 +1,5 @@
 #include "System.h"
+#include <fstream>
 const double EPSILON = -0.00001;
 const double POSITIVE_EPSILON = 0.00001;
 
@@ -396,4 +397,122 @@ void System::findDriver(const MyString& driverName, short rating)
 		if ((*drivers[i]).getUserName() == driverName)
 			(*drivers[i]).myRating.addRating(rating);
 	}
+}
+
+bool System::readClients(const char* fileName)
+{
+	std::ifstream ifs(fileName);
+	if (!ifs.is_open())
+		return false;
+	
+	size_t size = 0;
+	ifs >> size;
+	ifs.ignore();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ifs >> (*clients[i]);
+		ifs.ignore();
+	}
+
+	ifs.close();
+	return true;
+}
+
+bool System::readDrivers(const char* fileName)
+{
+	std::ifstream ifs(fileName);
+	if (!ifs.is_open())
+		return false;
+
+	size_t size = 0;
+	ifs >> size;
+	ifs.ignore();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ifs >> (*drivers[i]);
+		ifs.ignore();
+	}
+
+	ifs.close();
+	return true;
+}
+
+bool System::readOrders(const char* fileName)
+{
+	std::ifstream ifs(fileName);
+	if (!ifs.is_open())
+		return false;
+
+	size_t size = 0;
+	ifs >> size;
+	ifs.ignore();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ifs >> (*orders[i]);
+		ifs.ignore();
+	}
+
+	ifs.close();
+	return true;
+}
+
+bool System::writeClients(const char* fileName)
+{
+	std::ofstream ofs(fileName);
+	if (!ofs.is_open())
+		return false;
+
+	size_t size = clients.getSize();
+	ofs << size << std::endl;
+	
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ofs << (*clients[i]) << std::endl;
+	}
+
+	ofs.close();
+	return true;
+}
+
+bool System::writeDrivers(const char* fileName)
+{
+	std::ofstream ofs(fileName);
+	if (!ofs.is_open())
+		return false;
+
+	size_t size = drivers.getSize();
+	ofs << size << std::endl;
+	double sum = 0;
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ofs << (*drivers[i]) << std::endl;
+		sum += drivers[i]->getAccount();
+	}
+	ofs << "Company profit: " << sum;
+	ofs.close();
+	return true;
+}
+
+bool System::writeOrders(const char* fileName)
+{
+	std::ofstream ofs(fileName);
+	if (!ofs.is_open())
+		return false;
+
+	size_t size = orders.getSize();
+	ofs << size << std::endl;
+
+
+	for (size_t i = 0; i < size; i++)
+	{
+		ofs << (*orders[i]) << std::endl;
+	}
+
+	ofs.close();
+	return true;
 }
