@@ -12,12 +12,11 @@ class Driver:public User
 public:
 	struct Rating
 	{
-	private:
-		unsigned long long sum;
-		size_t count;
 	public:
-		Rating() :sum(1), count(1) {};
-		Rating(unsigned long long sum, size_t count) :sum(sum), count(count) {};
+		unsigned long long sum = 1;
+		size_t count = 1;
+	public:
+		
 		void addRating(short rating)
 		{
 			sum += rating;
@@ -44,5 +43,9 @@ public:
 	const MyString& getCarNumber() const;
 	const MyString& getPhoneNumber() const;
 	bool getIsFree() const;
+
+	friend std::istream& operator>>(std::istream& is, Driver& driver);
 	
 };
+
+std::ostream& operator<<(std::ostream& os, const Driver& driver);

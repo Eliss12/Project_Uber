@@ -55,3 +55,28 @@ bool Driver::getIsFree() const
 	return isFree;
 }
 
+std::istream& operator>>(std::istream& is, Driver& driver)
+{
+	is >> driver._type;
+	is >> driver._userName;
+	is >> driver._password;
+	is >> driver._firstName;
+	is >> driver._lastName;
+	is >> driver._account;
+	is >> driver._carNumber;
+	is >> driver._phoneNumber;
+	is >> driver._myAddress;
+	is >> driver.isFree;
+	is >> driver.myRating.sum >> driver.myRating.count;
+
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Driver& driver)
+{
+	return os << driver.getType() << " " << driver.getUserName() << " " << driver.getPassword() << " " <<
+		driver.getFirstName() << " " << driver.getLastName() << " " << driver.getAccount() << " " << 
+		driver.getCarNumber() << " " << driver.getPhoneNumber() << " " << driver.getAddress() << " " <<
+		driver.getIsFree() << " " << driver.myRating.sum << " " << driver.myRating.count;
+}
+
