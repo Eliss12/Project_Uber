@@ -42,12 +42,25 @@ std::istream& operator>>(std::istream& is, Address& address)
 	is >> address._addressName;
 	is >> address._point.x;
 	is >> address._point.y;
-	is >> address._additionalInf;
-
+	char buff[1024];
+	is.ignore(1, ' ');
+	is.getline(buff, 1024, '$');
+	MyString buffer(buff);
+	address._additionalInf = buffer;
+	
 	return is;
 }
 
 std::ostream& operator<<(std::ostream& os, const Address& address)
 {
-	return os << address.getAddressName() << " " << address.getPoint().x << " " << address.getPoint().y << " " << address.getAdditionalInf();
+	if (address.getAddressName() == "\0")
+		os << "#$";
+	else
+		os << address.getAddressName();
+	os << " " << address.getPoint().x << " " << address.getPoint().y << " ";
+	if (address.getAdditionalInf() == "\0")
+		os << "#$";
+	else
+		os << address.getAdditionalInf() << '$';
+	return os;
 }
