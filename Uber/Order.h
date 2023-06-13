@@ -36,9 +36,14 @@ public:
 	const Client& getClient() const;
 	const Address& getAddress() const;
 	const Address& getDestination() const;
+	unsigned int getTravelersCount() const;
 	unsigned int getID() const;
 	bool getAccepted() const;
 	bool getCanceled() const;
 	bool getFinished() const;
 	bool getIsPaid() const;
+
+	friend std::istream& operator>>(std::istream& is, Order& order);
 };
+
+std::ostream& operator<<(std::ostream& os, const Order& order);

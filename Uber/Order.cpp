@@ -104,3 +104,28 @@ bool Order::getIsPaid() const
 {
 	return isPaid;
 }
+
+unsigned int Order::getTravelersCount() const
+{
+	return _travelersCount;
+}
+
+std::istream& operator>>(std::istream& is, Order& order)
+{
+	is >> order._driver;
+	is >> order._client;
+	is >> order._address >> order._destination;
+	is >> order._travelersCount >> order._ID;
+	is >> order.accepted >> order.canceled >> order.finished;
+	is >> order._minutes >> order.moneyToBePaid >> order.isPaid;
+
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Order& order)
+{
+	return os << order.getDriver() << " " << order.getClient() << " " << order.getAddress() << " " <<
+		order.getDestination() << " " << order.getTravelersCount() << " " << order.getID() << " " <<
+		order.getAccepted() << " " << order.getCanceled() << " " << order.getFinished() << " " <<
+		order.getMinutes() << " " << order.getMoneyToBePaid() << " " << order.getIsPaid();
+}
