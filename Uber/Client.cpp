@@ -8,3 +8,20 @@ Client::Client(const MyString& type, const MyString& userName, const MyString& p
 {
 
 }
+
+std::istream& operator>>(std::istream& is, Client& client)
+{
+	is >> client._type;
+	is >> client._userName;
+	is >> client._password;
+	is >> client._firstName;
+	is >> client._lastName;
+	is >> client._account;
+	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Client& client)
+{
+	return os << client.getType() << " " << client.getUserName() << " " << client.getPassword() << " " <<
+		client.getFirstName() << " " << client.getLastName() << " " << client.getAccount();
+}
