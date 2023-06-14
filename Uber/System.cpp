@@ -34,6 +34,7 @@ bool System::registers(const MyString& type, const MyString& userName, const MyS
 	{
 		SharedPtr<Client> client(new Client(type, userName, password, firstName, lastName));
 		clients.pushBack(client);
+		std::cout << "Your registration was successful!" << std::endl;
 		return true;
 	}
 	
@@ -49,6 +50,7 @@ bool System::registers(const MyString& type, const MyString& userName, const MyS
 	{
 		SharedPtr<Driver> driver(new Driver(type, userName, password, firstName, lastName, carNumber, phoneNumber));
 		drivers.pushBack(driver);
+		std::cout << "Your registration was successful!" << std::endl;
 		return true;
 	}
 	
@@ -60,7 +62,7 @@ bool System::login(const MyString& userName, const MyString& password)
 {
 	if (currentClient.isNotNullptr() || currentDriver.isNotNullptr())
 	{
-		std::cout << "Please, logout the previous user to login new one!";
+		std::cout << "Please, logout the previous user to login new one!" << std::endl;
 		return false;
 	}
 
@@ -228,7 +230,7 @@ bool System::acceptOrder(unsigned int ID, int minutes)
 		}
 
 	}
-	std::cout << "You do not have an order with this ID!";
+	std::cout << "You do not have an order with this ID!" << std::endl;
 	return false;
 }
 
@@ -408,13 +410,15 @@ bool System::readClients(const char* fileName)
 	size_t size = 0;
 	ifs >> size;
 	ifs.ignore();
+	Client myClient;
 
 	for (size_t i = 0; i < size; i++)
 	{
-		ifs >> (*clients[i]);
+		ifs >> myClient;
+		clients.pushBack(SharedPtr<Client>(new Client(myClient)));
 		ifs.ignore();
 	}
-
+	
 	ifs.close();
 	return true;
 }
@@ -428,10 +432,12 @@ bool System::readDrivers(const char* fileName)
 	size_t size = 0;
 	ifs >> size;
 	ifs.ignore();
+	Driver myDriver;
 
 	for (size_t i = 0; i < size; i++)
 	{
-		ifs >> (*drivers[i]);
+		ifs >> myDriver;
+		drivers.pushBack(SharedPtr<Driver>(new Driver(myDriver)));
 		ifs.ignore();
 	}
 
@@ -448,10 +454,12 @@ bool System::readOrders(const char* fileName)
 	size_t size = 0;
 	ifs >> size;
 	ifs.ignore();
+	Order myOrder;
 
 	for (size_t i = 0; i < size; i++)
 	{
-		ifs >> (*orders[i]);
+		ifs >> myOrder;
+		orders.pushBack(SharedPtr<Order>(new Order(myOrder)));
 		ifs.ignore();
 	}
 
@@ -467,8 +475,6 @@ bool System::writeClients(const char* fileName)
 
 	size_t size = clients.getSize();
 	ofs << size << std::endl;
-	
-
 	for (size_t i = 0; i < size; i++)
 	{
 		ofs << (*clients[i]) << std::endl;
