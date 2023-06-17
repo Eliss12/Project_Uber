@@ -186,6 +186,12 @@ const Driver& System::findDriver(const Address& address)
 
 void System::order(const Address& address, const Address& destination, unsigned int travelersCount)
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return;
+	}
+		
 	SharedPtr<Order> order(new Order((*currentClient), address, destination, travelersCount));
 	(*order).setID(orders.getSize() + 1);
 	(*order).setDriver(findDriver(address));
@@ -195,6 +201,11 @@ void System::order(const Address& address, const Address& destination, unsigned 
 
 void System::checkMessages() const
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -212,6 +223,11 @@ void System::checkMessages() const
 
 bool System::acceptOrder(unsigned int ID, int minutes)
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -236,6 +252,11 @@ bool System::acceptOrder(unsigned int ID, int minutes)
 
 bool System::declineOrder(unsigned int ID)
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -254,11 +275,21 @@ bool System::declineOrder(unsigned int ID)
 
 void System::changeAddress(const Address& address)
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return;
+	}
 	currentDriver->setAddress(address);
 }
 
 bool System::finishOrder(unsigned int ID)
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -278,6 +309,11 @@ bool System::finishOrder(unsigned int ID)
 
 bool System::cancelOrder(unsigned int ID)
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -285,6 +321,12 @@ bool System::cancelOrder(unsigned int ID)
 			(*orders[i]).getFinished() == false)
 		{
 			(*orders[i]).setCanceled(true);
+			size_t driversSize = drivers.getSize();
+			for (size_t i = 0; i < driversSize; i++)
+			{
+				if ((*drivers[i]).getUserName() == orders[i]->getDriver().getUserName())
+					drivers[i]->setIsFree(true);
+			}
 			return true;
 		}
 
@@ -295,6 +337,11 @@ bool System::cancelOrder(unsigned int ID)
 
 void System::checkOrder(unsigned int ID) const
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -329,11 +376,21 @@ void System::checkOrder(unsigned int ID) const
 
 void System::addMoney(double amount)
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return;
+	}
 	(*currentClient).setAccount((*currentClient).getAccount() + amount);
 }
 
 bool System::pay(unsigned int ID, double amount)
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -358,6 +415,11 @@ bool System::pay(unsigned int ID, double amount)
 
 bool System::acceptPayment(unsigned int ID)
 {
+	if (currentDriver.isNotNullptr() == false)
+	{
+		std::cout << "You are not a driver!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
@@ -376,6 +438,11 @@ bool System::acceptPayment(unsigned int ID)
 
 bool System::rate(const MyString& driverName, short rating)
 {
+	if (currentClient.isNotNullptr() == false)
+	{
+		std::cout << "You are not a client!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
