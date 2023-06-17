@@ -1,9 +1,4 @@
-# Project_Uber
-## Table of content
-* [Project_Uber](*introduction)
-* [Project_Uber](*client's-functions)
-* [Project_Uber](*driver's-functions)
-* [Project_Uber](*How-it-works)
+# Project_Uber 
 ## Introduction
 This is a simplified system of a taxi company. The application is able to support 2 types of users – customers and drivers. They are be able to register and log in to the system using a username and password, and exit the application without it terminating.
 ## Client's functions
