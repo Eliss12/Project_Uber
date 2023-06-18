@@ -386,6 +386,7 @@ void System::addMoney(double amount)
 	if (amount < EPSILON)
 	{
 		std::cout << "Invalid amount!" << std::endl;
+		return;
 	}
 	(*currentClient).setAccount((*currentClient).getAccount() + amount);
 }
@@ -400,6 +401,7 @@ bool System::pay(unsigned int ID, double amount)
 	if (amount < EPSILON)
 	{
 		std::cout << "Invalid amount!" << std::endl;
+		return false;
 	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
