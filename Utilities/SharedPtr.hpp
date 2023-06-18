@@ -2,6 +2,8 @@
 #include <iostream>
 #include <memory>
 
+// Credits: https://github.com/Angeld55/Object-oriented_programming_FMI/blob/master/Week%2012/Templates/SharedPtr/SharedPtr.hpp
+
 template <typename T>
 class SharedPtr
 {

@@ -1,6 +1,8 @@
 #include "MyString.h"
 #pragma warning (disable:4996)
 
+// Credits: https://github.com/Angeld55/Object-oriented_programming_FMI/blob/master/Week%2009/MyString%20(with%20move)/MyString.cpp
+
 MyString::MyString(size_t capacity)
 {
 	_length = capacity - 1;
@@ -80,11 +82,15 @@ void MyString::copyFrom(const MyString& other)
 	strcpy(_data, other._data);
 }
 
-MyString::MyString(MyString&& other) noexcept
-{
-	_data = other._data; // to function moveFrom ?
+void MyString::move(MyString&& other) {
+	_data = other._data;
 	other._data = nullptr;
 	_length = other._length;
+}
+
+MyString::MyString(MyString&& other) noexcept
+{
+	move(std::move(other));
 }
 
 MyString& MyString::operator=(MyString&& other) noexcept
@@ -92,9 +98,7 @@ MyString& MyString::operator=(MyString&& other) noexcept
 	if (this != &other)
 	{
 		free();
-		_data = other._data;
-		other._data = nullptr;
-		_length = other._length;
+		move(std::move(other));
 	}
 	return *this;
 }

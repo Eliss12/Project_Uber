@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 
+// Credits: https://github.com/stoychoX/Object-oriented_programming_FMI_2021-2022/blob/main/Sem.%2010/Practicum/Vector.hpp
+
 template <typename T>
 class Vector
 {

@@ -1,12 +1,15 @@
 #pragma once
 #include <iostream>
 
+//Credits: https://github.com/Angeld55/Object-oriented_programming_FMI/blob/master/Week%2009/MyString%20(with%20move)/MyString.h
+
 class MyString
 {
 	char* _data;
 	size_t _length;
 
 	void copyFrom(const MyString& data);
+	void move(MyString&& other);
 	void free();
 
 	explicit MyString(size_t capacity); //for memory allocation. How much bytes to allocate
