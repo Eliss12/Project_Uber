@@ -118,7 +118,8 @@ void System::checkDriverNotifications() const
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
-		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getCanceled() == true)
+		if ((*currentDriver).getUserName() == (*orders[i]).getDriver().getUserName() && (*orders[i]).getCanceled() == true
+			&& orders[i]->getAccepted() == true)
 		{
 			std::cout << "Order with ID " << (*orders[i]).getID() << " was canceled!" << std::endl;
 		}
@@ -322,10 +323,10 @@ bool System::cancelOrder(unsigned int ID)
 		{
 			(*orders[i]).setCanceled(true);
 			size_t driversSize = drivers.getSize();
-			for (size_t i = 0; i < driversSize; i++)
+			for (size_t j = 0; j < driversSize; j++)
 			{
-				if ((*drivers[i]).getUserName() == orders[i]->getDriver().getUserName())
-					drivers[i]->setIsFree(true);
+				if ((*drivers[j]).getUserName() == orders[i]->getDriver().getUserName())
+					drivers[j]->setIsFree(true);
 			}
 			return true;
 		}
@@ -359,13 +360,14 @@ void System::checkOrder(unsigned int ID) const
 				return;
 			}
 			std::cout << "Driver: " << (*orders[i]).getDriver().getFirstName() << " " << (*orders[i]).getDriver().getLastName();
+			std::cout << std::endl << "Username: " << orders[i]->getDriver().getUserName();
 			std::cout << std::endl << "Car number: " << (*orders[i]).getDriver().getCarNumber();
 			std::cout << std::endl << "Phone number: " << (*orders[i]).getDriver().getPhoneNumber();
 			std::cout << std::endl << "Rating: " << (*orders[i]).getDriver().myRating.getRating() << std::endl;
 			return;
 		}
 		else if ((*currentClient).getUserName() == (*orders[i]).getClient().getUserName() &&
-			(*orders[i]).getID() == ID && !(*orders[i]).getAccepted())
+			    (*orders[i]).getID() == ID && !(*orders[i]).getAccepted())
 		{
 			std::cout << "Your order is in process!" << std::endl;
 			return;
@@ -427,7 +429,7 @@ bool System::acceptPayment(unsigned int ID)
 		if (orders[i]->getID() == ID && orders[i]->getDriver().getUserName() == currentDriver->getUserName() &&
 			orders[i]->getFinished() == true && orders[i]->getIsPaid())
 		{
-			currentDriver->setAccount(orders[i]->getMoneyToBePaid());
+			currentDriver->setAccount(orders[i]->getMoneyToBePaid() + currentDriver->getAccount());
 			std::cout << "You successfully added " << orders[i]->getMoneyToBePaid() << " leva to your bank account!" << std::endl;
 			return true;
 		}
