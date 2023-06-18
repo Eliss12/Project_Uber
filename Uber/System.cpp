@@ -445,6 +445,11 @@ bool System::rate(const MyString& driverName, short rating)
 		std::cout << "You are not a client!" << std::endl;
 		return false;
 	}
+	if (rating < 1 || rating > 5)
+	{
+		std::cout << "Invalid rating! It should be from 1 to 5!" << std::endl;
+		return false;
+	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
 	{
