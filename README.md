@@ -6,7 +6,7 @@ This is a simplified system of a taxi company. The application is able to suppor
 
 Orders a taxi by specifying current address, destination and number of passengers.
 Each address contains a name, coordinates (point with x and y) and additional specifying information (optional for each address).
-When sending an order to the application, the system must trace the notification to all available drivers, first sending it to the driver closest to the address from which it was ordered. When a driver accepts the order, the system notifies the user. The system generates a unique id and prints it to the user.
+When sending an order to the application, the system must trace the notification to all available drivers, first sending it to the driver closest to the address from which it was ordered. When a driver accepts the order, the system notifies the user. The system generates a unique ID and prints it to the user.
 * CHECK_ORDER
 
 Checks the status of the order by its ID - whether it has been accepted, which driver will fulfill it, what the driver's details are(name and surname, car number, phone number, rating) and how long it will take to arrive.
@@ -33,7 +33,7 @@ Driver changes his current address (name and coordinates).
 
 * CHECK_MESSAGES
 
-Checks messages sent by the system. There are the orders that the system sends to him.
+Checks messages sent by the system. These are the orders that the system sends to him.
 
 * ACCEPT_ORDER
 
