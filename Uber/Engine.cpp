@@ -60,7 +60,7 @@ void Engine::printOptions()
 	std::cout << "b. Check your order by its ID." << std::endl;
 	std::cout << "c. Cancel an order by its ID." << std::endl;
 	std::cout << "d. Pay for an order by its ID and amount of money." << std::endl;
-	std::cout << "e. Rate a driver by his user name and rating." << std::endl;
+	std::cout << "e. Rate a driver by his username and rating." << std::endl;
 	std::cout << "f. Add money to your bank account by entering amount of money." << std::endl << std::endl;
 
 	std::cout << "If you are a driver by pressing letters (g-l) you can: " << std::endl;
@@ -70,7 +70,7 @@ void Engine::printOptions()
 	std::cout << "j. Decline an order by its ID." << std::endl;
 	std::cout << "k. Finish an order by its ID." << std::endl;
 	std::cout << "l. Accept payment by order's ID." << std::endl << std::endl;
-	std::cout << "All users can logout by pressing \"q\"!" << std::endl;
+	std::cout << "All users can log out by pressing \"q\"!" << std::endl;
 }
 
 Address Engine::makeAddress()
@@ -142,7 +142,7 @@ void Engine::clientOptions(System& mySystem, char option)
 	else if (option == 'e')
 	{
 		MyString name;
-		std::cout << "Driver's name: ";
+		std::cout << "Driver's username: ";
 		std::cin >> name;
 		short rating;
 		std::cout << "Rating: ";
@@ -227,16 +227,16 @@ void Engine::actionsAfterLogIn(System& mySystem)
 
 void Engine::readFiles(System& mySystem)
 {
-	mySystem.readClients("myClients.txt");
-	mySystem.readDrivers("myDrivers.txt");
-	mySystem.readOrders("myOrders.txt");
+	mySystem.readClients("ClientsTest1.txt");
+	mySystem.readDrivers("DriversTest1.txt");
+	mySystem.readOrders("OrdersTest1.txt");
 }
 
 void Engine::writeFiles(System& mySystem)
 {
-	mySystem.writeClients("myClients.txt");
-	mySystem.writeDrivers("myDrivers.txt");
-	mySystem.writeOrders("myOrders.txt");
+	mySystem.writeClients("ClientsTest1.txt");
+	mySystem.writeDrivers("DriversTest1.txt");
+	mySystem.writeOrders("OrdersTest1.txt");
 }
 
 bool Engine::checkPhoneNumber(const MyString& number)
@@ -276,7 +276,7 @@ void Engine::execute()
 
 	while (true)
 	{
-		std::cout << "Hello, press 1 or 2 to make registration or login!" << std::endl;
+		std::cout << "Hello, press 1 or 2 to make registration or log in!" << std::endl;
 		std::cout << "If you want to close the app, enter \"c\"!" << std::endl;
 		std::cin >> option;
 		if (option == "1")
@@ -295,7 +295,7 @@ void Engine::execute()
 				registerDriver(mySystem, type);
 			}
 			else
-				std::cout << "Invalid type!";
+				std::cout << "Invalid type!" << std::endl;
 		}
 		else if (option == "2")
 		{
