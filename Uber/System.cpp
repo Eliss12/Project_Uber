@@ -383,6 +383,10 @@ void System::addMoney(double amount)
 		std::cout << "You are not a client!" << std::endl;
 		return;
 	}
+	if (amount < EPSILON)
+	{
+		std::cout << "Invalid amount!" << std::endl;
+	}
 	(*currentClient).setAccount((*currentClient).getAccount() + amount);
 }
 
@@ -392,6 +396,10 @@ bool System::pay(unsigned int ID, double amount)
 	{
 		std::cout << "You are not a client!" << std::endl;
 		return false;
+	}
+	if (amount < EPSILON)
+	{
+		std::cout << "Invalid amount!" << std::endl;
 	}
 	size_t ordersSize = orders.getSize();
 	for (size_t i = 0; i < ordersSize; i++)
