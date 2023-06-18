@@ -1,0 +1,5 @@
+3
+driver driver1 12345678 Peter Petrov 50 1254 0896514785 Address8 8 9 #$ 1 5 2
+driver driver3 12345678 Peter Stoyanov 0 1896 0874123658 #$ 0 0 #$ 1 1 1
+driver driver2 12345678 Ivan Ivanov 0 1478 0895478520 #$ 0 0 #$ 1 1 1
+Company profit: 50

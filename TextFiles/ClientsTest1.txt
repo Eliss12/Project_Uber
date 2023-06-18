@@ -1,0 +1,4 @@
+3
+client client1 12345678 Elena Dimitrova 0
+client client2 12345678 Ivana Borisova 0
+client client3 12345678 Ivo Borisov 0
